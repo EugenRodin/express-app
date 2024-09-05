@@ -1,4 +1,3 @@
-// Articles
 const getArticlesHandler = (req, res) => {
     res.send('GET Users route')}
 const postArticlesHandler = (req, res) => {
