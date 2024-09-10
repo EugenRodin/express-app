@@ -1,11 +1,16 @@
-import express from 'express'
-import {getUsersHandler, postUsersHandler, getUserByIdHandler, putUserByIdHandler, deleteUserByIdHandler} from '../controllers/users.mjs'
-import {validateUserPost, validateUserPut} from "../validarors/userValidator.mjs";
+import { Router } from 'express'
+import {deleteUserByIdHandler, getUserByIdHandler, getUsersHandler, postUsersHandler, putUserByIdHandler} from '../controllers/users.mjs'
+import { validateUserPost, validateUserPut, validateParamsUserId } from '../validarors/userValidation.mjs'
 
-const usersRouter = express.Router()
+const usersRouter = Router()
 
-usersRouter.route('/', ).get(getUsersHandler).post(validateUserPost, postUsersHandler)
+usersRouter.route('/')
+    .get(getUsersHandler)
+    .post(validateUserPost, postUsersHandler)
 
-usersRouter.route('/:userId').get(getUserByIdHandler).put(validateUserPut, putUserByIdHandler).delete(deleteUserByIdHandler)
+usersRouter.route('/:userId')
+    .get(validateParamsUserId, getUserByIdHandler)
+    .delete(validateParamsUserId, deleteUserByIdHandler)
+    .put(validateParamsUserId, validateUserPut, putUserByIdHandler)
 
 export default usersRouter

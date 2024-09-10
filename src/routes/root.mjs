@@ -1,8 +1,9 @@
-import express from 'express'
+import { Router } from 'express'
 import { getRootHandler } from '../controllers/root.mjs'
 
-const rootRouter = express.Router()
+const rootHandler = Router()
 
-rootRouter.route('/').get(getRootHandler)
+rootHandler.route('/')
+    .get(getRootHandler)
 
-export default rootRouter
+export default rootHandler
