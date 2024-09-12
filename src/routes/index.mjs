@@ -8,5 +8,8 @@ const router = Router()
 router.use('/', rootHandler)
 router.use('/users', usersRouter)
 router.use('/articles', articlesRouter)
+router.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
 export default router

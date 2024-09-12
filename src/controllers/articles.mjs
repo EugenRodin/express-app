@@ -1,12 +1,17 @@
+import {getArticleById, getArticles} from "../services/articleService.mjs";
+
 const getArticlesHandler = (req, res) => {
-    res.send('GET Users route')}
+    const articles = getArticles()
+    res.render('articles/index', { articles })
+}
 const postArticlesHandler = (req, res) => {
     res.send('GET Users route')}
 
 // Articles by id
 const getArticleByIdHandler = (req, res) => {
-    const {ArticleId} = req.params
-    res.send(`GET Users route ${ArticleId}`)
+    const articleId = req.params['articleId']
+    const article = getArticleById(articleId)
+    res.render('articles/article', { article })
 }
 const deleteArticleByIdHandler = (req, res) => {
     const {ArticleId} = req.params

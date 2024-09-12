@@ -1,24 +1,30 @@
-// Users
+import { getUsers, getUserById } from '../services/userService.mjs'
+
+// users
 const getUsersHandler = (req, res) => {
-    res.send('GET Users route')
+    const users = getUsers()
+    res.render('users/index', { users })
 }
 
 const postUsersHandler = (req, res) => {
-    res.send('POST Users route')
+    res.end('Post users route')
 }
 
-// Users by id
+// users/:userId
 const getUserByIdHandler = (req, res) => {
-    const {userId} = req.params
-    res.send(`GET Users route ${userId}`)
+    const userId = req.params['userId']
+    const user = getUserById(userId)
+    res.render('users/user', { user })
 }
+
 const deleteUserByIdHandler = (req, res) => {
-    const {userId} = req.params
-    res.send(`DELETE Users by id route with id: ${userId}`)
+    const userId = req.params['userId']
+    res.end(`Delete user by Id route: ${userId}`)
 }
+
 const putUserByIdHandler = (req, res) => {
-    const {userId} = req.params
-    res.send(`PUT Users by id route with id: ${userId}`)
+    const userId = req.params['userId']
+    res.end(`Put user by Id route: ${userId}`)
 }
 
 export {
