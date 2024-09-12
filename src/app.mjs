@@ -21,12 +21,14 @@ app.use(router)
 app.use(errors())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   if (!res.headersSent) {
     res.status(err.status || 500).json({
       status: 'error',
       message: err.message || 'Internal server error'
     })
+  } else {
+    next(err)
   }
 })
 
